@@ -26,26 +26,26 @@ object CommonStructures{
         println(recoveredNodeValue)
     }
 
-    // Stack - FILO
+    // Stack - LIFO - put in on end (first or last) and get from the same end
     fun usageOfStack(){
         val stack: ArrayDeque<String> = ArrayDeque()
-        stack.addLast("a")
-        stack.addLast("b")
-        stack.addLast("c")
-        stack.addLast("d")
-        stack.addLast("e")
+        stack.addFirst("a")
+        stack.addFirst("b")
+        stack.addFirst("c")
+        stack.addFirst("d")
+        stack.addFirst("e")
 
-        println(stack.removeLast())
-        println(stack.removeLast())
-        println(stack.removeLast())
-        println(stack.last())
-        println(stack.removeLast())
-        println(stack.removeLast())
-        println(stack.removeLastOrNull())
+        println(stack.removeFirst())
+        println(stack.removeFirst())
+        println(stack.removeFirst())
+        println(stack.first())
+        println(stack.removeFirst())
+        println(stack.removeFirst())
+        println(stack.removeFirstOrNull())
     }
 
 
-    // Queue - FIFO
+    // Queue - FIFO - put in on end (first or last) and get from the oposite end
     fun usageOfQueue(){
         val stack: ArrayDeque<String> = ArrayDeque()
         stack.addFirst("a")
@@ -86,5 +86,9 @@ object CommonStructures{
         linkedList.reverse()
         linkedList.transverBackwards()
         linkedList.transverse()
+        linkedList.removeLast()
+        linkedList.removeFirst()
+        linkedList.transverse()
+        linkedList.transverBackwards()
     }
 }

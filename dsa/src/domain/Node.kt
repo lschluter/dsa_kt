@@ -31,6 +31,17 @@ class MyLinkedList<T>(var head: Node<T>){
         throw NullPointerException()
     }
 
+
+    fun removeLast(): T{
+        tail.prev?.let{
+            val result = tail
+            it.next = null
+            tail = it
+            return result.value
+        }
+        throw NullPointerException()
+    }
+
     fun transverse(){
         var next:Node<T>? = head
         println("\ntransverse \n length: $length")
@@ -54,10 +65,9 @@ class MyLinkedList<T>(var head: Node<T>){
         if(head.next == null){
             return
         }
-
         var actual: Node<T>? = head
         val newHead = tail
-        val newTail = head
+        tail = head
         while(actual != null){
             val prev = actual.prev
             val next = actual.next
@@ -66,7 +76,6 @@ class MyLinkedList<T>(var head: Node<T>){
             actual = next
         }
         head = newHead
-        tail = newTail
     }
 
 
