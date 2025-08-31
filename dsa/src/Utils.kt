@@ -77,11 +77,14 @@ object CommonStructures{
         linkedList.append(16)
         linkedList.append(3)
         linkedList.append(6)
-        linkedList.transverse()
         linkedList.prepend(1)
-        linkedList.insert(3, 13)
         linkedList.transverse()
-        println("\n result of remove :${linkedList.remove(4)}")
+        linkedList.insert(3, 13)
+        linkedList.transverBackwards()
+        linkedList.transverse()
+        println("reverse")
+        linkedList.reverse()
+        linkedList.transverBackwards()
         linkedList.transverse()
     }
 }

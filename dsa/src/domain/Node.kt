@@ -7,7 +7,7 @@ class MyLinkedList<T>(var head: Node<T>){
     var length = 1
 
     fun append(value: T){
-        val newNode = Node(value)
+        val newNode = Node(value, prev = tail)
         tail.next = newNode
         tail = newNode
         length ++
@@ -15,6 +15,7 @@ class MyLinkedList<T>(var head: Node<T>){
 
     fun prepend(value: T){
         val newNode = Node(value, head)
+        head.prev = newNode
         head = newNode
         length ++
 
@@ -23,6 +24,7 @@ class MyLinkedList<T>(var head: Node<T>){
     fun removeFirst(): T{
         head.next?.let{
             val result = head
+            it.prev = null
             head = it
             return result.value
         }
@@ -37,6 +39,36 @@ class MyLinkedList<T>(var head: Node<T>){
             next = next.next ?: return
         }
     }
+
+
+    fun transverBackwards(){
+        var prev:Node<T>? = tail
+        println("\ntransverse backwards \n length: $length")
+        while(prev != null){
+            print("value: ${prev.value} --> ")
+            prev = prev.prev ?: return
+        }
+    }
+
+    fun reverse(){
+        if(head.next == null){
+            return
+        }
+
+        var actual: Node<T>? = head
+        val newHead = tail
+        val newTail = head
+        while(actual != null){
+            val prev = actual.prev
+            val next = actual.next
+            actual.prev = next
+            actual.next = prev
+            actual = next
+        }
+        head = newHead
+        tail = newTail
+    }
+
 
     fun transverseToIndex(index: Int, onIterate: () -> Unit, onFound: () -> Unit){
         for(i in 0..<length){
@@ -55,12 +87,10 @@ class MyLinkedList<T>(var head: Node<T>){
         }
 
         var actual = head
-        var prev = head
         transverseToIndex(index, {
-            prev = actual
             actual = actual.next!!
         }, {
-            prev.next = actual.next
+            actual.prev!!.next = actual.next
             length --
         })
         return actual.value
@@ -76,13 +106,13 @@ class MyLinkedList<T>(var head: Node<T>){
         }
 
         var actual = head
-        var prev = head
         transverseToIndex(index, onFound = {
-            val newNode = Node(value, actual)
-            prev.next = newNode
+            val prev = actual.prev
+            val newNode = Node(value, next = actual, prev=prev)
+            actual.prev = newNode
+            prev!!.next = newNode
             length ++},
             onIterate = {
-            prev = actual
             actual = actual.next!!
         })
     }
