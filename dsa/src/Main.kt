@@ -1,3 +1,4 @@
+import CommonStructures.usageOfGraphs
 import CommonStructures.usageOfHash
 import CommonStructures.usageOfMyBST
 import CommonStructures.usageOfPriorityQueue
@@ -21,6 +22,9 @@ fun main() {
 
     //Priority  Queue
     usageOfPriorityQueue()
+
+    //graph
+    usageOfGraphs()
 
 
 }
