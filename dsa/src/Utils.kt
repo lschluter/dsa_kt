@@ -1,7 +1,10 @@
+import domain.BinarySearchTree
 import domain.MyLinkedList
 import domain.Node
 import domain.TreeNode
+import java.util.Comparator
 import java.util.LinkedList
+import java.util.PriorityQueue
 
 object CommonStructures{
 
@@ -91,4 +94,36 @@ object CommonStructures{
         linkedList.transverse()
         linkedList.transverBackwards()
     }
+
+    fun usageOfMyBST(){
+        val tree = BinarySearchTree<Int>(TreeNode(9))
+        tree.insert(4)
+        tree.insert(6)
+        tree.insert(20)
+        tree.insert(170)
+        tree.insert(15)
+        tree.insert(1)
+        tree.traverse(tree.root)
+        println(tree.search(3)?.value)
+        println(tree.delete(4))
+        tree.traverse(tree.root)
+    }
+
+    // PRIORITY QUEUE
+    fun usageOfPriorityQueue(){
+        val priorityQueue = PriorityQueue<Int>()
+        priorityQueue.add(10)
+        priorityQueue.add(6)
+        priorityQueue.add(3)
+        println(priorityQueue.first())
+
+
+        val priorityQueueMax = PriorityQueue<Int>(Comparator.reverseOrder())
+        priorityQueueMax.add(10)
+        priorityQueueMax.add(6)
+        priorityQueueMax.add(3)
+        println(priorityQueueMax.first())
+
+    }
+
 }
