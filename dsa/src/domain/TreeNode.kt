@@ -3,7 +3,7 @@ package domain
 data class TreeNode<T: Comparable<T>>(val value: T, var left: TreeNode<T>? = null, var right: TreeNode<T>? = null)
 
 class BinarySearchTree<T : Comparable<T>>(var root: TreeNode<T>){
-
+    //this is DFS
     fun traverse(node: TreeNode<T>){
         node.left?.let{
             traverse(it)
@@ -12,6 +12,35 @@ class BinarySearchTree<T : Comparable<T>>(var root: TreeNode<T>){
         node.right?.let{
             traverse(it)
             println(it.value)
+        }
+    }
+
+    fun breadthFirstSearch(){
+        val queue: ArrayDeque<TreeNode<T>> = ArrayDeque()
+        queue.addFirst(root)
+        while(queue.isNotEmpty()){
+            val currentNode = queue.removeLast()
+            println(currentNode.value)
+            currentNode.left?.let{
+                queue.addFirst(it)
+            }
+            currentNode.right?.let{
+                queue.addFirst(it)
+            }
+        }
+    }
+
+    fun breadthFirstSearchRec(queue: ArrayDeque<TreeNode<T>>){
+        if(queue.isEmpty()){
+            return
+        }
+        val currentNode = queue.removeLast()
+        println(currentNode.value)
+        currentNode.left?.let{
+            queue.addFirst(it)
+        }
+        currentNode.right?.let{
+            queue.addFirst(it)
         }
     }
 
@@ -96,3 +125,30 @@ class BinarySearchTree<T : Comparable<T>>(var root: TreeNode<T>){
 }
 
 //options for unbalanced -> RedBlack or AVL
+
+/*
+3
+[[0,0,0,1,1,1,0,1,0,0]
+,[1,1,0,0,0,1,0,1,1,1]
+,[0,0,0,1,1,1,0,1,0,0]
+,[0,1,1,0,0,0,1,0,1,0]
+,[0,1,1,1,1,1,0,0,1,0]
+,[0,0,1,0,1,1,1,1,0,1]
+,[0,1,1,0,0,0,1,1,1,1]
+,[0,0,1,0,0,1,0,1,0,1]
+,[1,0,1,0,1,1,0,0,0,0]
+,[0,0,0,0,1,1,0,0,0,1]]
+
+4
+
+[[0,1,1,0,0,0,0,1,1,0,0,0]
+,[1,0,1,1,1,0,1,0,1,1,1,0]
+,[1,1,0,1,0,0,1,1,0,1,1,1]
+,[1,0,0,1,1,0,1,0,1,0,1,0]
+,[1,0,0,0,0,1,0,0,1,1,0,1]
+,[1,1,1,0,0,0,1,0,0,1,1,1]
+,[1,1,1,0,0,0,0,1,0,1,0,1]
+,[0,1,1,1,1,0,0,1,1,0,0,0]
+,[0,1,0,1,0,1,0,1,0,0,0,1]
+,[0,0,1,0,1,1,0,0,0,1,1,1]]
+ */
