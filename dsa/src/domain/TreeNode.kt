@@ -3,16 +3,43 @@ package domain
 data class TreeNode<T: Comparable<T>>(val value: T, var left: TreeNode<T>? = null, var right: TreeNode<T>? = null)
 
 class BinarySearchTree<T : Comparable<T>>(var root: TreeNode<T>){
-    //this is DFS
-    fun traverse(node: TreeNode<T>){
+    //this is DFS in Order
+    fun depthFirstSearch(node: TreeNode<T>): List<T>{
+        var leftList = emptyList<T>()
+        var rightList = emptyList<T>()
         node.left?.let{
-            traverse(it)
-            println(it.value)
+            leftList = depthFirstSearch(it)
         }
         node.right?.let{
-            traverse(it)
-            println(it.value)
+            rightList = depthFirstSearch(it)
         }
+        return leftList.plus(node.value).plus(rightList)
+    }
+    //this is DFS Pre Order
+    fun depthFirstSearchPreOrder(node: TreeNode<T>): List<T>{
+        var leftList = emptyList<T>()
+        var rightList = emptyList<T>()
+        node.left?.let{
+            leftList = depthFirstSearchPreOrder(it)
+        }
+        node.right?.let{
+            rightList = depthFirstSearchPreOrder(it)
+        }
+        return listOf(node.value).plus(leftList).plus(rightList)
+    }
+
+
+    //this is DFS Post Order
+    fun depthFirstSearchPostOrder(node: TreeNode<T>): List<T>{
+        var leftList = emptyList<T>()
+        var rightList = emptyList<T>()
+        node.left?.let{
+            leftList = depthFirstSearchPostOrder(it)
+        }
+        node.right?.let{
+            rightList = depthFirstSearchPostOrder(it)
+        }
+        return leftList.plus(rightList).plus(node.value)
     }
 
     fun breadthFirstSearch(){
@@ -42,6 +69,7 @@ class BinarySearchTree<T : Comparable<T>>(var root: TreeNode<T>){
         currentNode.right?.let{
             queue.addFirst(it)
         }
+        return breadthFirstSearchRec(queue)
     }
 
     fun insert(value: T){

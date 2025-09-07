@@ -104,12 +104,39 @@ object CommonStructures{
         tree.insert(170)
         tree.insert(15)
         tree.insert(1)
-        tree.traverse(tree.root)
-        println(tree.search(3)?.value)
-        println(tree.delete(4))
-        tree.traverse(tree.root)
+        println(" \n \n dfs in order\n \n")
+        println(tree.depthFirstSearch(tree.root).joinToString(","))
+        println(" \n \n dfs pre order\n \n")
+        println(tree.depthFirstSearchPreOrder(tree.root).joinToString(","))
+        println(" \n \n dfs post order\n \n")
+        println(tree.depthFirstSearchPostOrder(tree.root).joinToString(","))
+        println(" \n \n bfs \n \n")
+        tree.breadthFirstSearch()
+        println(" \n \n bfs rec \n \n")
+        tree.breadthFirstSearchRec(ArrayDeque<TreeNode<Int>>().also{ it.addFirst(tree.root) })
+    }
+    // binary search on an array
+    fun binarySearch(array: IntArray,  target: Int): Int{
+        var left = 0
+        var right:Int = array.size-1
+
+        while( left <= right){
+            val mid = (left + right).ushr(1)
+            val midVal = array[mid]
+            if(midVal == target){
+                return mid
+            }else if(midVal < target) {
+                left = mid + 1
+            }else{
+                right = mid -1
+            }
+        }
+        return -1
     }
 
+    fun usageOfBinarySearchArr(){
+        println("result of binary search: ${binarySearch(intArrayOf(1,3,6,7,13,17,32,67,78,89,101,123,321,432,665,765), 13)}")
+    }
     // PRIORITY QUEUE
     fun usageOfPriorityQueue(){
         val priorityQueue = PriorityQueue<Int>()

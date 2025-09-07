@@ -1,3 +1,4 @@
+import CommonStructures.usageOfBinarySearchArr
 import CommonStructures.usageOfGraphs
 import CommonStructures.usageOfHash
 import CommonStructures.usageOfMyBST
@@ -19,12 +20,12 @@ fun main() {
 //    CommonStructures.usageOfManualLinkedList()
     //usage of tree
     //usageOfMyBST()
-
+    usageOfBinarySearchArr()
     //Priority  Queue
-    usageOfPriorityQueue()
+    //usageOfPriorityQueue()
 
     //graph
-    usageOfGraphs()
+    //usageOfGraphs()
 
 
 }
